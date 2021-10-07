@@ -1,0 +1,9 @@
+int mystrlen(char *s) {
+  char *x = s;
+  int len = 0;
+  while (*(x+len) != NULL) {
+    len += 1;
+  }
+
+  return len;
+}
