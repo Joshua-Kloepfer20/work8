@@ -1,14 +1,6 @@
 #include <string.h>
 #include <stdio.h>
-
-int main() {
-	char str[10] = "hello\0";
-	char str2[10] = " world\0";
-	printf("standard: %d\t mine: %d\n", strlen(str), mystrlen(str));
-        printf("standard: %s\t mine: %s\n", strcpy(str, str2), mystrcpy(str, str2));
-	return 0;
-}
-
+#include "mystring.h"
 
 int mystrlen(char *s) {
 	char *x = s;
@@ -20,15 +12,57 @@ int mystrlen(char *s) {
 }
 char * mystrcpy(char *dest, char *source) {
 	int i = 0;
+	while (source[i] != 0) {
+		dest[i] = source[i];
+		i++;
+	}
+	return dest;
+}
+char * mystrcat(char *dest, char *source) {
+	int i = 0;
 	int n = 0;
-	while (dest[i] != "\0" || source[n] != "\0") {
-		if (dest[i] != "\0") {
+	while (source[n] != 0) {
+		if (dest[i] != 0) {
 			i++;
 		}
-		else if (source[n] != "\0") {
+		else if (source[n] != 0) {
 			dest[i + n] = source[n];
 			n++;
 		}
 	}
 	return dest;
+}
+int mystrcmp(char *s1, char *s2) {
+	int i = 0;
+	while (s1[i] != 0 && s2[i] != 0) {
+		if (s1[i] < s2[i]) {
+			return -1;
+		}
+		else if (s1[i] > s2[i]) {
+			return 1;
+		}
+		i++;
+	}
+
+	if (s1[i] == 0 && s2[i] == 0) {
+		return 0;
+	}
+	else if (s1[i] == 0) {
+		return -1;
+	}
+	else {
+		return 1;
+	}
+}
+char * mystrchr(char *s, char c) {
+	int i = 0;
+	while (s[i] != 0) {
+		if (s[i] == c) {
+			return s + i;
+		}
+		i++;
+	}
+	if (c == 0) {
+		return s + i;
+	}
 }
